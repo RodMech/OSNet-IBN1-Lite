@@ -68,7 +68,7 @@ img_dict = {
     "image": zlibed.hex()
 }
 ```
-The image, in bytes format, has to be zlibed and hexed. 
+Where the image "zlibed", in bytes format, has to be converted to hexadecimal format. 
 
 
 
