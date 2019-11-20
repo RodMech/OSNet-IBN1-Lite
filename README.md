@@ -60,14 +60,14 @@ The net ingests cropped images, detections, bounding boxes with a requested form
     df = pd.read_csv("./dataset/input_dataset.csv")
 
 One of the columns has to be a string of a dict with the following format
-```json
-img_dict = {
-    "width": image_width,
-    "height": image_height,
-    "colors": colors,
-    "image": zlibed.hex()
-}
-```
+
+    img_dict = {
+        "width": image_width,
+        "height": image_height,
+        "colors": colors,
+        "image": zlibed.hex()
+    }
+
 Where the image "zlibed", in bytes format, has to be converted to hexadecimal format. 
 
 
