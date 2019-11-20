@@ -43,22 +43,46 @@ Or a docker-compose file could be used.
 Default weights are provided by the author at [Torxreid model zoo](https://kaiyangzhou.github.io/deep-person-reid/MODEL_ZOO). 
 
 
+
 ## How to run it
 
 The script main.py has the parameters that the user can modify. Unfortunately, in the present version, parameters have to be hard coded in the script.
+
 A future implementation will include a better way of changing the parameters. 
 
-1.- Load a pandas dataframe. One of the columns has to be a string
+The net ingests cropped images, detections, bounding boxes with a requested format. The format is shown in the 1<sup>st</sup> point.
+
+
+
+1.- Load a pandas dataframe:
 
     # Load pandas dataframe
     df = pd.read_csv("./dataset/input_dataset.csv")
 
-    
+One of the columns has to be a string of a dict with the following format
+
+    img_dict = {
+        "width": image_width,
+        "height": image_height,
+        "colors": colors,
+        "image": zlibed.hex()
+    }
+
+The image, in bytes format, has to be zlibed and hexed. 
+
+
+
+2.- Uncompress the cropped image:
+
     # Uncompress cropped image
     df["uncompressed_feature_vector"] = df.apply(lambda x: uncompress_string_image(
         compresed_cropped_image=x["feature_vector"]),
         axis=1)
-    
+
+
+
+3.- Declare the encoder object. 
+
     # Declare an encoder object
     encoder = OsNetEncoder(
         input_width=704,
@@ -71,18 +95,26 @@ A future implementation will include a better way of changing the parameters.
         norm_mean=[0.485, 0.456, 0.406],
         norm_std=[0.229, 0.224, 0.225],
         GPU=True)
-    
+  - `num_classes`: Number of ids originally trained (CUHK03: 767, Market1501: 751)
+
+
+
+4.- Register the new column as a new dataframe feature:      
+
     # Add the new column
     df["feature_vector"] = encoder.get_features(list(df["uncompressed_feature_vector"]))
-    
     # Clean the dataframe
     df.drop("uncompressed_feature_vector", axis=1, inplace=True)
-    
+
+
+
+5.- Save the data as a .csv: 
+
     # Write the dataframe to a .csv
     df.to_csv("./output_files/output_dataset.csv",
-              index=False,
-              quoting=csv.QUOTE_NONNUMERIC
-              )
+    index=False,
+    quoting=csv.QUOTE_NONNUMERIC
+    )
 
 
 
