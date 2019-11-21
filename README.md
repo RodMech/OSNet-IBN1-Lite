@@ -120,8 +120,11 @@ Where the image "zlibed", in bytes format, has to be converted to hexadecimal fo
 
 ## Performance
 
-It has been tested on a EC2 instance p2.xlarge, with an average of 35 images per second.  
+**No-GPU (2,2 GHz Intel Core i7):
+[PERFORMANCE] Features extracted:  2 Hz
 
+**GPU (Tesla K80):
+[PERFORMANCE] Features extracted: 35 Hz
 
 
 ## Citation
