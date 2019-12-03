@@ -4,7 +4,7 @@
 
 ## Contents
 
-This project is a reduced version of [OSNet](Omni-Scale Feature Learning for Person Re-Identification), a network designed by Kaiyang Zhou. It has been extracted from [Torxreid](https://github.com/KaiyangZhou/deep-person-reid), the main framework for training and testing reID CNNs. 
+This project is a reduced version of [OSNet](https://arxiv.org/pdf/1905.00953.pdf)(Omni-Scale Feature Learning for Person Re-Identification), a network designed by Kaiyang Zhou. It has been extracted from [Torxreid](https://github.com/KaiyangZhou/deep-person-reid), the main framework for training and testing reID CNNs. 
 
 Many features from the original backend have been isolated. Torxvision dependency has been deleted to keep docker container as light as possible. The required methods have been extracted from the source code. 
 
